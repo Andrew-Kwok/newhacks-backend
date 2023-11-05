@@ -4,7 +4,14 @@ from rest_framework import serializers
 
 from .models import (
     Venue,
+    VenueSurvey,
 )
+
+
+class VenueSurveySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = VenueSurvey
+        fields = '__all__'
 
 
 class VenueSerializer(serializers.ModelSerializer):

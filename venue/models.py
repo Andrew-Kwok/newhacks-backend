@@ -38,9 +38,9 @@ class Venue(models.Model):
 
     # Statistics
     rating = models.FloatField()
-    capacity = models.IntegerField()
-    parking = models.IntegerField()
-    traffic = models.IntegerField()
+    capacity = models.IntegerField()  # Objective
+    parking = models.IntegerField()   # Objective
+    traffic = models.FloatField()
     scenery = models.FloatField()
     comment = models.TextField(blank=True)
 
@@ -53,3 +53,19 @@ class Venue(models.Model):
     class Meta:
         verbose_name_plural = 'Venues'
         ordering = ['name']
+
+
+class VenueSurvey(models.Model):
+    id = models.AutoField(primary_key=True)
+    venue = models.ForeignKey(Venue, on_delete=models.CASCADE)
+    rating = models.FloatField()
+    traffic = models.FloatField()
+    scenery = models.FloatField()
+    comment = models.TextField(blank=True)
+
+    def __str__(self):
+        return f'{self.venue.name} [{self.rating}]'
+
+    class Meta:
+        verbose_name_plural = 'Venue Ratings'
+        ordering = ['venue']
